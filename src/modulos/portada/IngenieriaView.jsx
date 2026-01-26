@@ -17,12 +17,12 @@ const renderBold = (text) => {
 };
 
 const PREVIEW_IMAGES = [
-    "/assets/images/platform_previews/preview_dashboard.png",
-    "/assets/images/platform_previews/preview_chat.png",
-    "/assets/images/platform_previews/preview_projects.png",
-    "/assets/images/platform_previews/preview_document_v2.png",
-    "/assets/images/platform_previews/preview_repository_updated.png",
-    "/assets/images/platform_previews/preview_file_updated.png"
+    "assets/images/platform_previews/preview_dashboard.png",
+    "assets/images/platform_previews/preview_chat.png",
+    "assets/images/platform_previews/preview_projects.png",
+    "assets/images/platform_previews/preview_document_v2.png",
+    "assets/images/platform_previews/preview_repository_updated.png",
+    "assets/images/platform_previews/preview_file_updated.png"
 ];
 
 const IngenieriaView = ({ activeDocFeature, setActiveDocFeature, t }) => {
