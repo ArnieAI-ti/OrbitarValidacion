@@ -32,5 +32,5 @@ export const Button = ({ children, variant = 'primary', className, ...props }) =
 };
 
 export const NewOrbitarLogo = ({ className }) => (
-    <img src={`${import.meta.env.BASE_URL}favicon.png`} alt="Orbitar Logo" className={className} />
+    <img src={`${import.meta.env.BASE_URL}favicon.png`} alt="Orbitar Logo" className={className} decoding="async" />
 );

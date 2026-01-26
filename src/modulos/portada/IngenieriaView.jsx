@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, memo } from 'react';
 import { Globe, Sparkles, Edit3, FileType, FileText, Check, Rocket, RefreshCw, Zap, Play, ArrowRight, ArrowLeft } from 'lucide-react';
 import { Badge } from '../compartido/Elementos';
 
@@ -8,6 +8,12 @@ import ProductStatus from './ProductStatus';
 import TeamSection from './TeamSection';
 
 import { CONTAINER_WIDTH } from '../../datos/constantes';
+
+// Memoize stable sub-sections to prevent unnecessary re-renders
+const MemoizedCompanyContext = memo(CompanyContext);
+const MemoizedArchitectureWorkflow = memo(ArchitectureWorkflow);
+const MemoizedProductStatus = memo(ProductStatus);
+const MemoizedTeamSection = memo(TeamSection);
 
 const renderBold = (text) => {
     if (!text) return text;
@@ -27,6 +33,17 @@ const PREVIEW_IMAGES = [
 
 const IngenieriaView = ({ activeDocFeature, setActiveDocFeature, t }) => {
     const [activePreview, setActivePreview] = useState(0);
+
+    // Optimized: Preload next and previous images for the slider
+    useEffect(() => {
+        const nextIdx = (activePreview + 1) % PREVIEW_IMAGES.length;
+        const prevIdx = (activePreview - 1 + PREVIEW_IMAGES.length) % PREVIEW_IMAGES.length;
+
+        [PREVIEW_IMAGES[nextIdx], PREVIEW_IMAGES[prevIdx]].forEach(src => {
+            const img = new Image();
+            img.src = src;
+        });
+    }, [activePreview]);
 
     return (
         <>
@@ -136,7 +153,7 @@ const IngenieriaView = ({ activeDocFeature, setActiveDocFeature, t }) => {
                 </div>
             </section >
 
-            <CompanyContext t={t} />
+            <MemoizedCompanyContext t={t} />
 
             {/* Espacio para Demo Video */}
             <section id="demo" className="py-32 border-t border-white/5">
@@ -149,8 +166,11 @@ const IngenieriaView = ({ activeDocFeature, setActiveDocFeature, t }) => {
 
                     <div className="w-full max-w-6xl mx-auto aspect-video rounded-[32px] bg-[#181820] border border-white/5 flex items-center justify-center overflow-hidden relative group shadow-2xl transition-all duration-500 hover:shadow-[0_0_20px_rgba(124,58,237,0.02)] hover:scale-[1.02]">
                         <img
+                            key={activePreview}
                             src={PREVIEW_IMAGES[activePreview]}
                             alt={t('video_title')}
+                            loading={activePreview === 0 ? "eager" : "lazy"}
+                            decoding="async"
                             className="absolute inset-0 w-full h-full object-contain p-4 md:p-8 transition-all duration-1000"
                         />
 
@@ -184,12 +204,9 @@ const IngenieriaView = ({ activeDocFeature, setActiveDocFeature, t }) => {
 
                         {/* Dots Indicator */}
                         <div className="absolute bottom-6 flex gap-2 z-10">
-                            <div className={`w-2 h-2 rounded-full transition-all duration-300 ${activePreview === 0 ? 'bg-white w-6' : 'bg-white/40'}`}></div>
-                            <div className={`w-2 h-2 rounded-full transition-all duration-300 ${activePreview === 1 ? 'bg-white w-6' : 'bg-white/40'}`}></div>
-                            <div className={`w-2 h-2 rounded-full transition-all duration-300 ${activePreview === 2 ? 'bg-white w-6' : 'bg-white/40'}`}></div>
-                            <div className={`w-2 h-2 rounded-full transition-all duration-300 ${activePreview === 3 ? 'bg-white w-6' : 'bg-white/40'}`}></div>
-                            <div className={`w-2 h-2 rounded-full transition-all duration-300 ${activePreview === 4 ? 'bg-white w-6' : 'bg-white/40'}`}></div>
-                            <div className={`w-2 h-2 rounded-full transition-all duration-300 ${activePreview === 5 ? 'bg-white w-6' : 'bg-white/40'}`}></div>
+                            {[0, 1, 2, 3, 4, 5].map(idx => (
+                                <div key={idx} className={`w-2 h-2 rounded-full transition-all duration-300 ${activePreview === idx ? 'bg-white w-6' : 'bg-white/40'}`}></div>
+                            ))}
                         </div>
                     </div>
 
@@ -209,7 +226,7 @@ const IngenieriaView = ({ activeDocFeature, setActiveDocFeature, t }) => {
                 </div>
             </section>
 
-            <ArchitectureWorkflow t={t} />
+            <MemoizedArchitectureWorkflow t={t} />
 
             <section id="documentos" className="py-32 relative border-t border-white/5">
                 <div className={`${CONTAINER_WIDTH} mx-auto px-6`}>
@@ -297,13 +314,12 @@ const IngenieriaView = ({ activeDocFeature, setActiveDocFeature, t }) => {
                 </div>
             </section>
 
-            {/* Estado del Producto */}
-            <ProductStatus t={t} />
+            <MemoizedProductStatus t={t} />
 
 
 
             {/* Equipo Fundador */}
-            <TeamSection t={t} />
+            <MemoizedTeamSection t={t} />
 
 
 

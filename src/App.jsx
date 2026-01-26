@@ -1,9 +1,13 @@
-import React, { useState, useEffect, useCallback, Suspense } from 'react';
+import React, { useState, useEffect, useCallback, Suspense, memo } from 'react';
 import { translations } from './datos/idiomas';
 import { NewOrbitarLogo, Button } from './modulos/compartido/Elementos';
 import HeaderNavigation from './modulos/compartido/HeaderNavigation';
 
 import Footer from './modulos/compartido/Footer';
+
+// Memoize sub-components to prevent re-renders when App state (like 'scrolled') changes
+const MemoizedHeaderNavigation = memo(HeaderNavigation);
+const MemoizedFooter = memo(Footer);
 
 // Lazy Load Views for Performance
 const LoginView = React.lazy(() => import('./modulos/autenticacion/LoginView'));
@@ -35,22 +39,31 @@ const App = () => {
         }
         window.scrollTo(0, 0);
 
+        let rafId;
         const handleScroll = () => {
-            setScrolled(window.scrollY > 50);
+            if (rafId) return;
+            rafId = requestAnimationFrame(() => {
+                const isScrolled = window.scrollY > 50;
+                setScrolled((prev) => prev !== isScrolled ? isScrolled : prev);
+                rafId = null;
+            });
         };
         window.addEventListener('scroll', handleScroll, { passive: true });
-        return () => window.removeEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            if (rafId) cancelAnimationFrame(rafId);
+        };
     }, []);
 
     // NUEVO: Función para cambiar la vista y forzar el scroll al inicio.
-    const setViewAndScroll = (view) => {
+    const setViewAndScroll = useCallback((view) => {
         setView(view);
         window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
+    }, []);
 
-    const handleLoginClick = () => {
+    const handleLoginClick = useCallback(() => {
         setIsLoginView(true);
-    };
+    }, []);
 
     if (isLoginView) {
         return (
@@ -107,7 +120,7 @@ const App = () => {
                         </div>
                     </div>
                     {/* Se pasa setViewAndScroll al componente de navegación */}
-                    <div className="absolute left-1/2 -translate-x-1/2 hidden md:block"><HeaderNavigation currentView={currentView} setView={setViewAndScroll} t={t} /></div>
+                    <div className="absolute left-1/2 -translate-x-1/2 hidden md:block"><MemoizedHeaderNavigation currentView={currentView} setView={setViewAndScroll} t={t} /></div>
                     <div className="flex items-center flex-shrink-0 gap-6">
                         <a
                             href="https://docs.google.com/forms/d/e/1FAIpQLSdJA70NBZpnUnfJGwBGw4XybJGPPWzP9q_MiMcRXp-sbBWT2Q/viewform"
@@ -129,7 +142,7 @@ const App = () => {
                 <Suspense fallback={<div className="min-h-screen"></div>}>
                     {renderView()}
                 </Suspense>
-                <Footer t={t} />
+                <MemoizedFooter t={t} />
             </div>
         </div>
     );
