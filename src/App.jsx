@@ -17,7 +17,7 @@ const IngenieriaView = React.lazy(() => import('./modulos/portada/IngenieriaView
 const App = () => {
     const [currentView, setView] = useState('ingenieria');
     const [activeDiagramBlockId, setActiveDiagramBlockId] = useState(null);
-    const [activeDocFeature, setActiveDocFeature] = useState(0);
+    const [activeDocFeature, setActiveDocFeature] = useState(1);
     const [scrolled, setScrolled] = useState(false);
     const [isLoginView, setIsLoginView] = useState(false);
     const [currentLang, setLang] = useState(() => {
@@ -126,7 +126,7 @@ const App = () => {
                             href="https://docs.google.com/forms/d/e/1FAIpQLSdJA70NBZpnUnfJGwBGw4XybJGPPWzP9q_MiMcRXp-sbBWT2Q/viewform"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="hidden lg:flex items-center justify-center border border-white/10 bg-white/5 hover:bg-white text-white hover:text-black rounded-xl px-6 py-2.5 text-xs font-semibold transition-all duration-700 ease-in-out hover:scale-110 active:scale-95"
+                            className="hidden lg:flex items-center justify-center border border-white/10 bg-white/5 hover:bg-white text-white hover:text-black rounded-xl px-6 py-2.5 text-xs font-semibold transition-all duration-700 ease-in-out hover:scale-110 active:scale-95 selection:bg-white selection:text-black"
                         >
                             {t('access_btn')}
                         </a>

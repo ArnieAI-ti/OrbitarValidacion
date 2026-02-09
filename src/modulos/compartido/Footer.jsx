@@ -36,6 +36,7 @@ const Footer = ({ t }) => {
                         <span className="text-white mb-2">{t('footer_header_project')}</span>
                         <a href="#documentos" className="hover:text-white transition-colors">{t('footer_link_docs')}</a>
                         <a href="#estado" className="hover:text-white transition-colors">{t('footer_link_status')}</a>
+                        <a href="#faq" className="hover:text-white transition-colors">{t('footer_link_faq')}</a>
                         <a href="#equipo" className="hover:text-white transition-colors">{t('footer_link_team')}</a>
                     </div>
                     <div className="flex flex-col gap-4">

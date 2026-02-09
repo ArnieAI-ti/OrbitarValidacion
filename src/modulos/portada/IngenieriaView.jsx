@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useMemo, memo } from 'react';
-import { Globe, Sparkles, Edit3, FileType, FileText, Check, Rocket, RefreshCw, Zap, Play, ArrowRight, ArrowLeft } from 'lucide-react';
+import { Globe, Sparkles, Edit3, FileType, FileText, Check, Rocket, RefreshCw, Zap, Play, ArrowUpRight, ArrowLeft, ArrowRight } from 'lucide-react';
 import { Badge } from '../compartido/Elementos';
 
 import CompanyContext from './CompanyContext';
 import ArchitectureWorkflow from './ArchitectureWorkflow';
 import ProductStatus from './ProductStatus';
 import TeamSection from './TeamSection';
+import FaqSection from './FaqSection';
 
 import { CONTAINER_WIDTH } from '../../datos/constantes';
 
@@ -13,6 +14,7 @@ import { CONTAINER_WIDTH } from '../../datos/constantes';
 const MemoizedCompanyContext = memo(CompanyContext);
 const MemoizedArchitectureWorkflow = memo(ArchitectureWorkflow);
 const MemoizedProductStatus = memo(ProductStatus);
+const MemoizedFaqSection = memo(FaqSection);
 const MemoizedTeamSection = memo(TeamSection);
 
 const renderBold = (text) => {
@@ -47,32 +49,35 @@ const IngenieriaView = ({ activeDocFeature, setActiveDocFeature, t }) => {
 
     return (
         <>
-            <section id="hero" className="relative pt-44 pb-32 px-6 overflow-hidden min-h-[90vh] flex flex-col justify-center">
+            {/* 1. HERO MAIN (Text & CTAs only) */}
+            <section id="hero" className="relative pt-44 pb-32 px-6 overflow-hidden min-h-[80vh] flex flex-col justify-center">
                 {/* Background Grid & Ambient Light */}
                 <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-100 contrast-150 mix-blend-overlay"></div>
                 <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-[600px] bg-violet-600/20 blur-[120px] rounded-full pointer-events-none mix-blend-screen animate-pulse"></div>
 
-                <div className="max-w-5xl mx-auto text-center relative z-10">
-                    <div className="inline-block mb-8 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+                <div className="max-w-6xl mx-auto text-center relative z-10 flex flex-col items-center">
+                    <div className="inline-block mb-6 animate-in fade-in slide-in-from-bottom-4 duration-1000">
                         <Badge className="bg-white/5 text-violet-200 border-violet-500/20 backdrop-blur-md px-4 py-1.5 text-[10px] tracking-[0.2em] uppercase font-bold shadow-[0_0_15px_rgba(139,92,246,0.3)]">
                             {t('hero_badge')}
                         </Badge>
                     </div>
 
-                    <h1 className="text-4xl md:text-7xl font-medium tracking-tight mb-8 text-white leading-[1.1] animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-100 max-w-6xl mx-auto drop-shadow-2xl">
-                        {t('hero_title_1')}<br />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-white to-violet-400 animate-gradient-x bg-[length:200%_auto]">
+                    <h1 className="text-4xl md:text-6xl lg:text-7xl font-medium tracking-tight mb-6 text-white leading-[1.1] animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-100 drop-shadow-2xl">
+                        <span className="block">{t('hero_title_1')}</span>
+                        <span className="block text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-white to-violet-400 animate-gradient-x bg-[length:200%_auto] py-2">
                             {t('hero_title_2')}
                         </span>
+                        <span className="block text-violet-200">{t('hero_title_3')}</span>
                     </h1>
 
                     <div className="max-w-3xl mx-auto mb-12 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">
-                        <p className="text-lg text-slate-400 leading-relaxed font-light mb-8 max-w-2xl mx-auto">
+                        <p className="text-base md:text-lg text-slate-300 leading-relaxed font-light mb-8 max-w-2xl mx-auto">
                             {t('hero_desc')}
                         </p>
 
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                            {/* Button 1: Agendar Demo */}
                             <a
                                 href="https://docs.google.com/forms/d/e/1FAIpQLSdJA70NBZpnUnfJGwBGw4XybJGPPWzP9q_MiMcRXp-sbBWT2Q/viewform"
                                 target="_blank"
@@ -80,23 +85,25 @@ const IngenieriaView = ({ activeDocFeature, setActiveDocFeature, t }) => {
                                 className="group relative px-8 py-4 bg-white text-black font-semibold rounded-full items-center gap-2 overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-[0_0_40px_rgba(255,255,255,0.3)] flex"
                             >
                                 <span className="relative z-10 flex items-center gap-2">
-                                    {t('login_btn')} <ArrowRight size={18} />
+                                    {t('hero_cta_demo')} <ArrowUpRight size={20} className="transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
                                 </span>
                                 <div className="absolute inset-0 bg-gradient-to-r from-violet-200 to-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                             </a>
 
-                            <button
-                                onClick={() => document.getElementById('demo')?.scrollIntoView({ behavior: 'smooth' })}
-                                className="px-8 py-4 bg-white/5 border border-white/10 text-white font-medium rounded-full hover:bg-white/10 transition-all hover:scale-105 active:scale-95 backdrop-blur-sm flex items-center gap-2"
+                            {/* Button 2: Solicitar Acceso */}
+                            <a
+                                href="#conceptual-view"
+                                onClick={(e) => { e.preventDefault(); document.getElementById('conceptual-view')?.scrollIntoView({ behavior: 'smooth' }); }}
+                                className="px-8 py-4 bg-white/5 border border-white/10 text-white font-medium rounded-full hover:bg-white/10 transition-all hover:scale-105 active:scale-95 backdrop-blur-sm flex items-center gap-2 cursor-pointer"
                             >
-                                <Play size={18} className="fill-white" /> {t('video_title')}
-                            </button>
+                                {t('hero_cta_access')}
+                            </a>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* ¿Qué es Orbitar? (Sección suavizada y minimalista) */}
+            {/* 2. VISION (Qué es Orbitar) */}
             <section id="vision" className="py-24 border-t border-white/5 relative">
                 <div className={`${CONTAINER_WIDTH} mx-auto px-6`}>
                     <div className="max-w-5xl mx-auto">
@@ -153,10 +160,14 @@ const IngenieriaView = ({ activeDocFeature, setActiveDocFeature, t }) => {
                 </div>
             </section >
 
+            {/* 3. PROBLEM */}
             <MemoizedCompanyContext t={t} />
 
-            {/* Espacio para Demo Video */}
-            <section id="demo" className="py-32 border-t border-white/5">
+            {/* 4. SOLUTION (Architecture/Workflow) */}
+            <MemoizedArchitectureWorkflow t={t} />
+
+            {/* 5. CONCEPTUAL VIEW (Carousel) */}
+            <section id="conceptual-view" className="py-24 border-t border-white/5 bg-[#0A0A10]">
                 <div className={`${CONTAINER_WIDTH} mx-auto px-6`}>
                     <div className="text-center mb-16">
                         <h2 className="text-3xl md:text-4xl font-medium text-white mb-6 leading-tight">
@@ -164,70 +175,53 @@ const IngenieriaView = ({ activeDocFeature, setActiveDocFeature, t }) => {
                         </h2>
                     </div>
 
-                    <div className="w-full max-w-6xl mx-auto aspect-video rounded-[32px] bg-[#181820] border border-white/5 flex items-center justify-center overflow-hidden relative group shadow-2xl transition-all duration-500 hover:shadow-[0_0_20px_rgba(124,58,237,0.02)] hover:scale-[1.02]">
+                    <div className="w-full max-w-6xl mx-auto aspect-video rounded-[32px] bg-[#181820] border border-white/5 flex items-center justify-center overflow-hidden relative group shadow-2xl transition-all duration-500 hover:shadow-[0_0_20px_rgba(124,58,237,0.02)] hover:scale-[1.01]">
                         <img
                             key={activePreview}
                             src={PREVIEW_IMAGES[activePreview]}
-                            alt={t('video_title')}
-                            loading={activePreview === 0 ? "eager" : "lazy"}
-                            decoding="async"
-                            className="absolute inset-0 w-full h-full object-contain p-4 md:p-8 transition-all duration-1000"
+                            alt="Platform Preview"
+                            loading="lazy"
+                            className="absolute inset-0 w-full h-full object-contain p-4 md:p-8 transition-all duration-700"
                         />
 
                         {/* Navigation Buttons */}
-                        {activePreview > 0 && (
+                        <div className="absolute inset-0 flex items-center justify-between px-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
                             <button
-                                onClick={() => setActivePreview(prev => prev - 1)}
-                                className="absolute left-4 top-1/2 -translate-y-1/2 bg-[#181820] border border-white/10 p-3 rounded-full shadow-2xl hover:scale-110 active:scale-95 transition-all duration-300 group/btn z-10"
+                                onClick={() => setActivePreview(prev => (prev - 1 + PREVIEW_IMAGES.length) % PREVIEW_IMAGES.length)}
+                                className="bg-[#181820]/80 backdrop-blur-sm border border-white/10 p-3 rounded-full shadow-lg hover:scale-110 active:scale-95 transition-all pointer-events-auto"
                             >
-                                <ArrowLeft size={18} className="text-slate-400 group-hover/btn:text-blue-400 transition-colors" />
+                                <ArrowLeft size={20} className="text-slate-300" />
                             </button>
-                        )}
-
-                        {activePreview < 5 && (
                             <button
-                                onClick={() => setActivePreview(prev => prev + 1)}
-                                className="absolute right-4 top-1/2 -translate-y-1/2 bg-[#181820] border border-white/10 p-3 rounded-full shadow-2xl hover:scale-110 active:scale-95 transition-all duration-300 group/btn z-10"
+                                onClick={() => setActivePreview(prev => (prev + 1) % PREVIEW_IMAGES.length)}
+                                className="bg-[#181820]/80 backdrop-blur-sm border border-white/10 p-3 rounded-full shadow-lg hover:scale-110 active:scale-95 transition-all pointer-events-auto"
                             >
-                                <ArrowRight size={18} className="text-slate-400 group-hover/btn:text-blue-400 transition-colors" />
+                                <ArrowRight size={20} className="text-slate-300" />
                             </button>
-                        )}
-
-                        {activePreview === 5 && (
-                            <button
-                                onClick={() => setActivePreview(0)}
-                                className="absolute right-4 top-1/2 -translate-y-1/2 bg-[#181820] border border-white/10 p-3 rounded-full shadow-2xl hover:scale-110 active:scale-95 transition-all duration-300 group/btn z-10"
-                            >
-                                <RefreshCw size={18} className="text-slate-400 group-hover/btn:text-emerald-400 transition-colors" />
-                            </button>
-                        )}
+                        </div>
 
                         {/* Dots Indicator */}
                         <div className="absolute bottom-6 flex gap-2 z-10">
-                            {[0, 1, 2, 3, 4, 5].map(idx => (
-                                <div key={idx} className={`w-2 h-2 rounded-full transition-all duration-300 ${activePreview === idx ? 'bg-white w-6' : 'bg-white/40'}`}></div>
+                            {PREVIEW_IMAGES.map((_, idx) => (
+                                <div key={idx} className={`h-1.5 rounded-full transition-all duration-300 ${activePreview === idx ? 'bg-violet-500 w-8' : 'bg-white/20 w-1.5'}`}></div>
                             ))}
                         </div>
-                    </div>
-
-                    <div className="mt-12 flex justify-center">
-                        <a
-                            href="https://docs.google.com/forms/d/e/1FAIpQLSdJA70NBZpnUnfJGwBGw4XybJGPPWzP9q_MiMcRXp-sbBWT2Q/viewform"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="group relative px-6 py-3 border border-white/20 text-slate-300 font-light text-sm rounded-full transition-all duration-700 ease-in-out hover:bg-white hover:text-black hover:border-white hover:scale-110 active:scale-95 z-20"
-                        >
-                            <span className="relative z-10 flex items-center gap-3 tracking-widest uppercase">
-                                {t('access_btn')}
-                                <ArrowRight size={16} className="transition-transform group-hover:translate-x-1 opacity-70 group-hover:opacity-100" />
-                            </span>
-                        </a>
                     </div>
                 </div>
             </section>
 
-            <MemoizedArchitectureWorkflow t={t} />
+            {/* CTA after Conceptual View */}
+            <div className="flex justify-center pb-24 component-padding border-b border-white/5 bg-[#0A0A10]">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdJA70NBZpnUnfJGwBGw4XybJGPPWzP9q_MiMcRXp-sbBWT2Q/viewform" target="_blank" rel="noopener noreferrer" className="group relative px-8 py-3 bg-white text-black font-bold rounded-full flex items-center gap-2 overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+                    <span className="relative z-10 flex items-center gap-2">{t('hero_cta_demo')} <ArrowUpRight size={18} /></span>
+                    <div className="absolute inset-0 bg-gradient-to-r from-violet-200 to-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </a>
+            </div>
 
+            {/* 6. PROJECT (Status) */}
+
+
+            {/* 7. DOCUMENTATION */}
             <section id="documentos" className="py-32 relative border-t border-white/5">
                 <div className={`${CONTAINER_WIDTH} mx-auto px-6`}>
                     <div className="text-center mb-16 max-w-3xl mx-auto">
@@ -243,8 +237,8 @@ const IngenieriaView = ({ activeDocFeature, setActiveDocFeature, t }) => {
                         <div className="p-10 md:w-1/2 flex flex-col justify-center relative z-10 lg:p-16">
                             <div className="flex flex-col gap-8">
                                 {[
-                                    { id: 0, icon: <Sparkles size={20} />, title: t('mod_budget'), desc: t('mod_budget_desc'), color: 'violet' },
                                     { id: 1, icon: <Edit3 size={20} />, title: t('mod_memory'), desc: t('mod_memory_desc'), color: 'blue' },
+                                    { id: 0, icon: <Sparkles size={20} />, title: t('mod_budget'), desc: t('mod_budget_desc'), color: 'violet' },
                                     { id: 2, icon: <FileType size={20} />, title: t('mod_philosophy'), desc: t('mod_philosophy_desc'), color: 'violet' }
                                 ].map((feature) => (
                                     <div key={feature.id} className="flex gap-5 group cursor-pointer" onMouseEnter={() => setActiveDocFeature(feature.id)}>
@@ -260,8 +254,8 @@ const IngenieriaView = ({ activeDocFeature, setActiveDocFeature, t }) => {
                                         </div>
                                     </div>
                                 ))}
-                                <div className="mt-4 pt-4 border-t border-white/5 pl-[76px]">
-                                    <p className={`text-[10px] uppercase tracking-widest transition-colors duration-500 ${activeDocFeature === 2 ? 'text-white' : 'text-slate-600'}`}>
+                                <div className="mt-4 pt-4 border-t border-white/5 pl-[38px]">
+                                    <p className={`text-[10px] uppercase tracking-widest transition-colors duration-500 whitespace-pre-line ${activeDocFeature === 2 ? 'text-white' : 'text-slate-600'}`}>
                                         {t('mod_view_more')}
                                     </p>
                                 </div>
@@ -283,28 +277,39 @@ const IngenieriaView = ({ activeDocFeature, setActiveDocFeature, t }) => {
                                 )}
                                 {activeDocFeature === 1 && (
                                     <div className="w-full max-w-[340px] bg-[#1C1C24] border border-white/10 rounded-[32px] p-8 shadow-[0_40px_80px_rgba(0,0,0,0.5)] relative">
-                                        <div className="mb-6 pb-6 border-b border-white/5 flex gap-3 items-center"><span className="w-3 h-3 rounded-full bg-blue-500"></span><span className="text-[10px] text-slate-400 font-mono tracking-[0.2em] uppercase font-bold">{t('mod_memory')}</span></div>
-                                        <div className="space-y-5">
-                                            <div className="h-2 w-full bg-white/10 rounded-full"></div>
-                                            <div className="h-2 w-full bg-white/10 rounded-full"></div>
-                                            <div className="h-2 w-[85%] bg-white/10 rounded-full"></div>
-                                            <div className="p-4 border border-dashed border-blue-500/30 rounded-2xl bg-blue-500/5 text-[10px] text-blue-200/90 font-mono flex items-center gap-3"><div className="w-1 h-4 bg-blue-500 animate-pulse rounded-full"></div> {t('card_memory_analyzing')}</div>
+                                        <div className="mb-6 pb-6 border-b border-white/5 flex gap-3 items-center">
+                                            <span className="w-3 h-3 rounded-full bg-blue-500"></span>
+                                            <span className="text-[10px] text-slate-400 font-mono tracking-[0.2em] uppercase font-bold">{t('mod_memory')}</span>
+                                        </div>
+                                        <div className="space-y-4">
+                                            <div className="flex justify-between items-center"><div className="w-1/2 h-2.5 bg-white/10 rounded-full"></div><div className="w-12 h-2.5 bg-white/10 rounded-full"></div></div>
+                                            <div className="flex justify-between items-center"><div className="w-2/3 h-2.5 bg-white/10 rounded-full"></div><div className="w-12 h-2.5 bg-white/10 rounded-full"></div></div>
+                                            <div className="flex justify-between items-center"><div className="w-1/3 h-2.5 bg-white/10 rounded-full"></div><div className="w-12 h-2.5 bg-white/10 rounded-full"></div></div>
+                                        </div>
+                                        <div className="mt-8 pt-6 border-t border-white/5 flex items-center justify-between">
+                                            <div className="h-3 w-1/4 bg-blue-500/20 rounded-full"></div>
+                                            <div className="px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-[10px] text-blue-400 font-bold">
+                                                TOTAL
+                                            </div>
                                         </div>
                                     </div>
                                 )}
                                 {activeDocFeature === 2 && (
                                     <div className="w-full max-w-[340px] bg-[#1C1C24] border border-white/10 rounded-[32px] p-8 shadow-[0_40px_80px_rgba(0,0,0,0.5)] relative">
-                                        <div className="mb-6 pb-6 border-b border-white/5 flex gap-3 items-center"><span className="w-3 h-3 rounded-full bg-violet-500"></span><span className="text-[10px] text-slate-400 font-mono tracking-[0.2em] uppercase font-bold">{t('mod_philosophy')}</span></div>
-                                        <div className="space-y-4">
-                                            <div className="flex items-center gap-3 text-[11px] text-slate-300 font-light transition-colors duration-500 group-hover:text-white/80"><Check size={14} className="text-slate-500 transition-colors duration-500 group-hover:text-white" /> {t('card_phil_obj')}</div>
-                                            <div className="flex items-center gap-3 text-[11px] text-slate-300 font-light transition-colors duration-500 group-hover:text-white/80"><Check size={14} className="text-slate-500 transition-colors duration-500 group-hover:text-white" /> {t('card_phil_analysis')}</div>
-                                            <div className="flex items-center gap-3 text-[11px] text-slate-400 opacity-60 font-light transition-colors duration-500 group-hover:text-white/80"><Check size={14} className="text-slate-500 transition-colors duration-500 group-hover:text-white" /> {t('card_phil_others')}</div>
+                                        <div className="mb-6 pb-6 border-b border-white/5 flex gap-3 items-center">
+                                            <span className="w-3 h-3 rounded-full bg-violet-500"></span>
+                                            <span className="text-[10px] text-slate-400 font-mono tracking-[0.2em] uppercase font-bold">{t('mod_philosophy')}</span>
                                         </div>
-                                        <div className="mt-8 pt-6 border-t border-white/5 flex flex-col items-center justify-center gap-2">
-                                            <div className="w-16 h-16 bg-red-500/10 rounded-2xl flex items-center justify-center">
-                                                <FileText size={32} className="text-red-500" />
+                                        <div className="space-y-4">
+                                            <div className="flex justify-between items-center"><div className="w-1/2 h-2.5 bg-white/10 rounded-full"></div><div className="w-12 h-2.5 bg-white/10 rounded-full"></div></div>
+                                            <div className="flex justify-between items-center"><div className="w-2/3 h-2.5 bg-white/10 rounded-full"></div><div className="w-12 h-2.5 bg-white/10 rounded-full"></div></div>
+                                            <div className="flex justify-between items-center"><div className="w-1/3 h-2.5 bg-white/10 rounded-full"></div><div className="w-12 h-2.5 bg-white/10 rounded-full"></div></div>
+                                        </div>
+                                        <div className="mt-8 pt-6 border-t border-white/5 flex items-center justify-between">
+                                            <div className="h-3 w-1/4 bg-violet-500/20 rounded-full"></div>
+                                            <div className="px-3 py-1 rounded-full bg-violet-500/10 border border-violet-500/20 text-[10px] text-violet-400 font-bold">
+                                                TOTAL
                                             </div>
-                                            <span className="text-[10px] font-bold text-red-400 tracking-widest">PDF</span>
                                         </div>
                                     </div>
                                 )}
@@ -314,14 +319,16 @@ const IngenieriaView = ({ activeDocFeature, setActiveDocFeature, t }) => {
                 </div>
             </section>
 
+            {/* 8. STANDARDS (ISO etc) */}
             <MemoizedProductStatus t={t} />
 
 
 
-            {/* Equipo Fundador */}
+            {/* 9. FAQ */}
+            <MemoizedFaqSection t={t} />
+
+            {/* 10. TEAM */}
             <MemoizedTeamSection t={t} />
-
-
 
         </>
     );
@@ -329,4 +336,3 @@ const IngenieriaView = ({ activeDocFeature, setActiveDocFeature, t }) => {
 };
 
 export default IngenieriaView;
-

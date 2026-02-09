@@ -10,7 +10,10 @@ const HeaderNavigation = ({ currentView, setView, t }) => {
     }
     return (
         <div className="flex items-center gap-8">
-            <button onClick={() => setView('ingenieria')} className={getLinkClass('ingenieria')}>{t('home')}</button>
+            <a href="#hero" onClick={(e) => { e.preventDefault(); document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' }); }} className={commonStyle + " text-slate-500 hover:text-white"}>{t('home')}</a>
+            <a href="#vision" onClick={(e) => { e.preventDefault(); document.getElementById('vision')?.scrollIntoView({ behavior: 'smooth' }); }} className={commonStyle + " text-slate-500 hover:text-white"}>{t('footer_link_vision')}</a>
+            <a href="#arquitectura" onClick={(e) => { e.preventDefault(); document.getElementById('arquitectura')?.scrollIntoView({ behavior: 'smooth' }); }} className={commonStyle + " text-slate-500 hover:text-white"}>{t('footer_link_how')}</a>
+            <a href="#documentos" onClick={(e) => { e.preventDefault(); document.getElementById('documentos')?.scrollIntoView({ behavior: 'smooth' }); }} className={commonStyle + " text-slate-500 hover:text-white"}>{t('modules_title')}</a>
         </div>
     );
 };
