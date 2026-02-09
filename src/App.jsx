@@ -134,9 +134,7 @@ const App = () => {
                 </div>
             </nav>
 
-            {/* Usar containerClass para z-index si es soportado, o volver a btnClass/iconSize */}
-            {/* LanguageSelector removed */}            {/* Usar containerClass para z-index si es soportado, o volver a btnClass/iconSize */}
-            {/* LanguageSelector removed */}
+
 
             <div className={`transition-all duration-1000 opacity-100`}>
                 <Suspense fallback={<div className="min-h-screen"></div>}>

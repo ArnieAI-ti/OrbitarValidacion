@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useMemo, memo } from 'react';
-import { Globe, Sparkles, Edit3, FileType, FileText, Check, Rocket, RefreshCw, Zap, Play, ArrowUpRight, ArrowLeft, ArrowRight } from 'lucide-react';
+import React, { useState, useEffect, useCallback, memo } from 'react';
+import { Rocket, RefreshCw, Zap, ArrowUpRight, ArrowLeft, ArrowRight } from 'lucide-react';
 import { Badge } from '../compartido/Elementos';
 
 import CompanyContext from './CompanyContext';
@@ -7,6 +7,7 @@ import ArchitectureWorkflow from './ArchitectureWorkflow';
 import ProductStatus from './ProductStatus';
 import TeamSection from './TeamSection';
 import FaqSection from './FaqSection';
+import DocumentationSection from './DocumentationSection';
 
 import { CONTAINER_WIDTH } from '../../datos/constantes';
 
@@ -16,6 +17,7 @@ const MemoizedArchitectureWorkflow = memo(ArchitectureWorkflow);
 const MemoizedProductStatus = memo(ProductStatus);
 const MemoizedFaqSection = memo(FaqSection);
 const MemoizedTeamSection = memo(TeamSection);
+const MemoizedDocumentationSection = memo(DocumentationSection);
 
 const renderBold = (text) => {
     if (!text) return text;
@@ -33,19 +35,35 @@ const PREVIEW_IMAGES = [
     `${import.meta.env.BASE_URL}assets/images/platform_previews/preview_file_updated.png`
 ];
 
-const IngenieriaView = ({ activeDocFeature, setActiveDocFeature, t }) => {
-    const [activePreview, setActivePreview] = useState(0);
-
-    // Optimized: Preload next and previous images for the slider
+const useImagePreloader = (currentIndex, images) => {
     useEffect(() => {
-        const nextIdx = (activePreview + 1) % PREVIEW_IMAGES.length;
-        const prevIdx = (activePreview - 1 + PREVIEW_IMAGES.length) % PREVIEW_IMAGES.length;
+        const nextIdx = (currentIndex + 1) % images.length;
+        const prevIdx = (currentIndex - 1 + images.length) % images.length;
 
-        [PREVIEW_IMAGES[nextIdx], PREVIEW_IMAGES[prevIdx]].forEach(src => {
+        [images[nextIdx], images[prevIdx]].forEach(src => {
             const img = new Image();
             img.src = src;
         });
-    }, [activePreview]);
+    }, [currentIndex, images]);
+};
+
+const IngenieriaView = ({ activeDocFeature, setActiveDocFeature, t }) => {
+    const [activePreview, setActivePreview] = useState(0);
+
+    // Custom hook for preloading images
+    useImagePreloader(activePreview, PREVIEW_IMAGES);
+
+    const nextPreview = useCallback(() => {
+        setActivePreview(prev => (prev + 1) % PREVIEW_IMAGES.length);
+    }, []);
+
+    const prevPreview = useCallback(() => {
+        setActivePreview(prev => (prev - 1 + PREVIEW_IMAGES.length) % PREVIEW_IMAGES.length);
+    }, []);
+
+    const scrollToSection = useCallback((id) => {
+        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    }, []);
 
     return (
         <>
@@ -93,7 +111,7 @@ const IngenieriaView = ({ activeDocFeature, setActiveDocFeature, t }) => {
                             {/* Button 2: Solicitar Acceso */}
                             <a
                                 href="#conceptual-view"
-                                onClick={(e) => { e.preventDefault(); document.getElementById('conceptual-view')?.scrollIntoView({ behavior: 'smooth' }); }}
+                                onClick={(e) => { e.preventDefault(); scrollToSection('conceptual-view'); }}
                                 className="px-8 py-4 bg-white/5 border border-white/10 text-white font-medium rounded-full hover:bg-white/10 transition-all hover:scale-105 active:scale-95 backdrop-blur-sm flex items-center gap-2 cursor-pointer"
                             >
                                 {t('hero_cta_access')}
@@ -187,13 +205,13 @@ const IngenieriaView = ({ activeDocFeature, setActiveDocFeature, t }) => {
                         {/* Navigation Buttons */}
                         <div className="absolute inset-0 flex items-center justify-between px-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
                             <button
-                                onClick={() => setActivePreview(prev => (prev - 1 + PREVIEW_IMAGES.length) % PREVIEW_IMAGES.length)}
+                                onClick={prevPreview}
                                 className="bg-[#181820]/80 backdrop-blur-sm border border-white/10 p-3 rounded-full shadow-lg hover:scale-110 active:scale-95 transition-all pointer-events-auto"
                             >
                                 <ArrowLeft size={20} className="text-slate-300" />
                             </button>
                             <button
-                                onClick={() => setActivePreview(prev => (prev + 1) % PREVIEW_IMAGES.length)}
+                                onClick={nextPreview}
                                 className="bg-[#181820]/80 backdrop-blur-sm border border-white/10 p-3 rounded-full shadow-lg hover:scale-110 active:scale-95 transition-all pointer-events-auto"
                             >
                                 <ArrowRight size={20} className="text-slate-300" />
@@ -218,111 +236,16 @@ const IngenieriaView = ({ activeDocFeature, setActiveDocFeature, t }) => {
                 </a>
             </div>
 
-            {/* 6. PROJECT (Status) */}
-
-
             {/* 7. DOCUMENTATION */}
-            <section id="documentos" className="py-32 relative border-t border-white/5">
-                <div className={`${CONTAINER_WIDTH} mx-auto px-6`}>
-                    <div className="text-center mb-16 max-w-3xl mx-auto">
-                        <h2 className="text-3xl md:text-4xl font-medium text-white mb-6 leading-tight">
-                            {t('modules_title')}
-                        </h2>
-                        <p className="text-slate-400 font-light max-w-2xl mx-auto leading-relaxed mt-4">
-                            {renderBold(t('modules_desc'))}
-                        </p>
-                    </div>
-
-                    <div className="overflow-hidden flex flex-col md:flex-row bg-[#121218] rounded-[40px] border border-white/5">
-                        <div className="p-10 md:w-1/2 flex flex-col justify-center relative z-10 lg:p-16">
-                            <div className="flex flex-col gap-8">
-                                {[
-                                    { id: 1, icon: <Edit3 size={20} />, title: t('mod_memory'), desc: t('mod_memory_desc'), color: 'blue' },
-                                    { id: 0, icon: <Sparkles size={20} />, title: t('mod_budget'), desc: t('mod_budget_desc'), color: 'violet' },
-                                    { id: 2, icon: <FileType size={20} />, title: t('mod_philosophy'), desc: t('mod_philosophy_desc'), color: 'violet' }
-                                ].map((feature) => (
-                                    <div key={feature.id} className="flex gap-5 group cursor-pointer" onMouseEnter={() => setActiveDocFeature(feature.id)}>
-                                        <div className={`w-14 h-14 rounded-2xl shrink-0 flex items-center justify-center transition-all duration-500 ${activeDocFeature === feature.id
-                                            ? `bg-white/10 text-white shadow-[0_0_20px_rgba(255,255,255,0.05)]`
-                                            : 'bg-white/5 text-slate-500'
-                                            } group-hover:bg-${feature.color}-500/10 group-hover:text-${feature.color}-400`}>
-                                            {feature.icon}
-                                        </div>
-                                        <div className={`${activeDocFeature === feature.id ? 'opacity-100' : 'opacity-40'} group-hover:opacity-100 transition-all duration-500`}>
-                                            <h4 className={`text-base font-medium mb-1 transition-colors duration-500 ${activeDocFeature === feature.id ? 'text-white' : 'text-slate-400'} group-hover:text-white`}>{feature.title}</h4>
-                                            <p className="text-xs text-slate-500 leading-relaxed font-light">{feature.desc}</p>
-                                        </div>
-                                    </div>
-                                ))}
-                                <div className="mt-4 pt-4 border-t border-white/5 pl-[38px]">
-                                    <p className={`text-[10px] uppercase tracking-widest transition-colors duration-500 whitespace-pre-line ${activeDocFeature === 2 ? 'text-white' : 'text-slate-600'}`}>
-                                        {t('mod_view_more')}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="md:w-1/2 relative min-h-[500px] bg-[#0A0A10]/50 flex items-center justify-center p-8 overflow-hidden">
-                            <div key={activeDocFeature} className="relative z-10 w-full h-full flex items-center justify-center transition-all duration-700 animate-in fade-in zoom-in-95">
-                                {activeDocFeature === 0 && (
-                                    <div className="w-full max-w-[340px] bg-[#1C1C24] border border-white/10 rounded-[32px] p-8 shadow-[0_40px_80px_rgba(0,0,0,0.5)] relative">
-                                        <div className="absolute -top-3 -right-3 bg-violet-600 text-white p-3 rounded-xl shadow-xl animate-bounce"><Sparkles size={18} /></div>
-                                        <div className="mb-6 pb-6 border-b border-white/5 flex gap-3 items-center"><span className="w-3 h-3 rounded-full bg-violet-500"></span><span className="text-[10px] text-slate-400 font-mono tracking-[0.2em] uppercase font-bold">{t('mod_budget')}</span></div>
-                                        <div className="space-y-4">
-                                            <div className="flex justify-between items-center"><div className="w-1/2 h-2.5 bg-white/10 rounded-full"></div><div className="w-12 h-2.5 bg-white/10 rounded-full"></div></div>
-                                            <div className="flex justify-between items-center"><div className="w-2/3 h-2.5 bg-white/10 rounded-full"></div><div className="w-12 h-2.5 bg-white/10 rounded-full"></div></div>
-                                            <div className="flex justify-between items-center"><div className="w-1/3 h-2.5 bg-white/10 rounded-full"></div><div className="w-12 h-2.5 bg-white/10 rounded-full"></div></div>
-                                        </div>
-                                        <div className="mt-8 pt-6 border-t border-white/5 flex justify-between items-center"><div className="h-3 w-1/4 bg-white/5 bg-violet-500/20 rounded-full"></div><div className="text-sm text-violet-400 font-mono font-bold tracking-tight">{t('card_budget_total')}</div></div>
-                                    </div>
-                                )}
-                                {activeDocFeature === 1 && (
-                                    <div className="w-full max-w-[340px] bg-[#1C1C24] border border-white/10 rounded-[32px] p-8 shadow-[0_40px_80px_rgba(0,0,0,0.5)] relative">
-                                        <div className="mb-6 pb-6 border-b border-white/5 flex gap-3 items-center">
-                                            <span className="w-3 h-3 rounded-full bg-blue-500"></span>
-                                            <span className="text-[10px] text-slate-400 font-mono tracking-[0.2em] uppercase font-bold">{t('mod_memory')}</span>
-                                        </div>
-                                        <div className="space-y-4">
-                                            <div className="flex justify-between items-center"><div className="w-1/2 h-2.5 bg-white/10 rounded-full"></div><div className="w-12 h-2.5 bg-white/10 rounded-full"></div></div>
-                                            <div className="flex justify-between items-center"><div className="w-2/3 h-2.5 bg-white/10 rounded-full"></div><div className="w-12 h-2.5 bg-white/10 rounded-full"></div></div>
-                                            <div className="flex justify-between items-center"><div className="w-1/3 h-2.5 bg-white/10 rounded-full"></div><div className="w-12 h-2.5 bg-white/10 rounded-full"></div></div>
-                                        </div>
-                                        <div className="mt-8 pt-6 border-t border-white/5 flex items-center justify-between">
-                                            <div className="h-3 w-1/4 bg-blue-500/20 rounded-full"></div>
-                                            <div className="px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-[10px] text-blue-400 font-bold">
-                                                TOTAL
-                                            </div>
-                                        </div>
-                                    </div>
-                                )}
-                                {activeDocFeature === 2 && (
-                                    <div className="w-full max-w-[340px] bg-[#1C1C24] border border-white/10 rounded-[32px] p-8 shadow-[0_40px_80px_rgba(0,0,0,0.5)] relative">
-                                        <div className="mb-6 pb-6 border-b border-white/5 flex gap-3 items-center">
-                                            <span className="w-3 h-3 rounded-full bg-violet-500"></span>
-                                            <span className="text-[10px] text-slate-400 font-mono tracking-[0.2em] uppercase font-bold">{t('mod_philosophy')}</span>
-                                        </div>
-                                        <div className="space-y-4">
-                                            <div className="flex justify-between items-center"><div className="w-1/2 h-2.5 bg-white/10 rounded-full"></div><div className="w-12 h-2.5 bg-white/10 rounded-full"></div></div>
-                                            <div className="flex justify-between items-center"><div className="w-2/3 h-2.5 bg-white/10 rounded-full"></div><div className="w-12 h-2.5 bg-white/10 rounded-full"></div></div>
-                                            <div className="flex justify-between items-center"><div className="w-1/3 h-2.5 bg-white/10 rounded-full"></div><div className="w-12 h-2.5 bg-white/10 rounded-full"></div></div>
-                                        </div>
-                                        <div className="mt-8 pt-6 border-t border-white/5 flex items-center justify-between">
-                                            <div className="h-3 w-1/4 bg-violet-500/20 rounded-full"></div>
-                                            <div className="px-3 py-1 rounded-full bg-violet-500/10 border border-violet-500/20 text-[10px] text-violet-400 font-bold">
-                                                TOTAL
-                                            </div>
-                                        </div>
-                                    </div>
-                                )}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <MemoizedDocumentationSection
+                t={t}
+                activeDocFeature={activeDocFeature}
+                setActiveDocFeature={setActiveDocFeature}
+                renderBold={renderBold}
+            />
 
             {/* 8. STANDARDS (ISO etc) */}
             <MemoizedProductStatus t={t} />
-
-
 
             {/* 9. FAQ */}
             <MemoizedFaqSection t={t} />
@@ -335,4 +258,4 @@ const IngenieriaView = ({ activeDocFeature, setActiveDocFeature, t }) => {
 
 };
 
-export default IngenieriaView;
+export default memo(IngenieriaView);
