@@ -20,10 +20,25 @@ const App = () => {
     const [activeDocFeature, setActiveDocFeature] = useState(1);
     const [scrolled, setScrolled] = useState(false);
     const [isLoginView, setIsLoginView] = useState(false);
-    const [currentLang, setLang] = useState(() => {
-        const browserLang = typeof navigator !== 'undefined' ? (navigator.language || navigator.userLanguage) : 'es';
-        return browserLang?.toLowerCase().startsWith('en') ? 'en' : 'es';
-    });
+    const getBrowserLang = () => {
+        if (typeof navigator === 'undefined') return 'es';
+        const browserLang = navigator.languages && navigator.languages.length
+            ? navigator.languages[0]
+            : navigator.language || navigator.userLanguage || 'es';
+        return browserLang.toLowerCase().startsWith('en') ? 'en' : 'es';
+    };
+
+    const [currentLang, setLang] = useState(getBrowserLang);
+
+    useEffect(() => {
+        const handleLanguageChange = () => {
+            const newLang = getBrowserLang();
+            setLang(newLang);
+        };
+
+        window.addEventListener('languagechange', handleLanguageChange);
+        return () => window.removeEventListener('languagechange', handleLanguageChange);
+    }, []);
 
     // Función de traducción
     const t = useCallback((key) => {
