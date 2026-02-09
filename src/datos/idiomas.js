@@ -128,7 +128,7 @@ export const translations = {
 
         // FAQ Section
         'faq_title': 'Resolución de Preguntas',
-        'faq_desc': 'Listado de las preguntas frecuentes con sus respuestas y canales para que la persona con dudas pueda preguntar.',
+        'faq_desc': 'Aquí encontrarás respuestas a las dudas más comunes sobre Orbitar y cómo puedes empezar a utilizar la plataforma.',
         'faq_q1': '¿Qué puedo lograr con Orbitar en mis proyectos?',
         'faq_a1': 'Puedes generar metrados, presupuestos, cotizaciones y documentación técnica en menos tiempo, reduciendo errores y mejorando la presentación profesional de tus propuestas.',
         'faq_q2': '¿Orbitar realmente calcula metrados y presupuestos automáticamente?',
@@ -292,7 +292,7 @@ export const translations = {
         'hero_title_2': 'with precision and speed',
         'hero_title_3': 'using AI',
         'hero_desc': 'Stop wasting hours in Excel. Generate automatic quantity takeoffs and technical budgets for HVAC, Electrical, lighting, and other areas. Close deals 3x faster.',
-        'hero_cta_demo': 'Schedule demo',
+        'hero_cta_demo': 'Request demo',
         'hero_cta_access': 'Technical view of the platform',
         'hero_footer': 'Orbitar allows generating reliable and fast technical budgets from blueprints and documentation, using automation and artificial intelligence.',
 
@@ -371,7 +371,7 @@ export const translations = {
 
         // FAQ Section
         'faq_title': 'Q&A Resolution',
-        'faq_desc': 'List of frequent questions with their answers and channels for anyone with doubts to ask.',
+        'faq_desc': 'Here you will find answers to the most common questions about Orbitar and how you can start using the platform.',
         'faq_q1': 'What can I achieve with Orbitar in my projects?',
         'faq_a1': 'You can generate takeoffs, budgets, quotes, and technical documentation in less time, reducing errors and improving the professional presentation of your proposals.',
         'faq_q2': 'Does Orbitar really calculate takeoffs and budgets automatically?',
@@ -456,8 +456,8 @@ export const translations = {
 
         // Others
         'chat_back': 'back',
-        'access_btn': 'Schedule demo',
-        'login_btn': 'Schedule demo',
+        'access_btn': 'Request demo',
+        'login_btn': 'Request demo',
         'chat_copy': 'Copy',
         'chat_regenerate': 'Regenerate',
         'chat_loading': 'Analyzing request...',
