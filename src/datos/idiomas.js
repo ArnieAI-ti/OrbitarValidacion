@@ -87,7 +87,7 @@ export const translations = {
         'status_title': 'Estándares Técnicos y Profesionalismo en tus Entregables',
         'status_desc': 'Orbitar simplifica la creación de cotizaciones, presupuestos y documentación técnica con resultados profesionales. La plataforma organiza automáticamente tu información siguiendo prácticas y estándares utilizados en proyectos reales.',
         'status_item_1': 'Entregables estructurados y profesionales',
-        'status_item_2': 'Reducción del 40% en tiempos de entrega',
+        'status_item_2': 'Reducción del 70% en tiempos de entrega',
         'status_item_3': 'Documentación 100% libre de errores de cálculo',
         'status_item_4': 'Cumplimiento de prácticas técnicas internacionales',
         'status_item_5': 'Redacción técnica clara y profesional',
