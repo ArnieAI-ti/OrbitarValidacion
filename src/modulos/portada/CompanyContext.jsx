@@ -63,9 +63,9 @@ const CompanyContext = ({ t }) => {
                                             {t('prob_desc')}
                                         </p>
                                         <div className="mt-4 space-y-3">
-                                            <div className="flex items-start gap-3 text-sm text-slate-400"><div className="w-1.5 h-1.5 rounded-full bg-red-500/20 mt-1"></div>{t('prob_point_1')}</div>
-                                            <div className="flex items-start gap-3 text-sm text-slate-400"><div className="w-1.5 h-1.5 rounded-full bg-red-500/20 mt-1"></div>{t('prob_point_2')}</div>
-                                            <div className="flex items-start gap-3 text-sm text-slate-400"><div className="w-1.5 h-1.5 rounded-full bg-red-500/20 mt-1"></div>{t('prob_point_3')}</div>
+                                            <div className="flex items-start gap-3 text-sm text-slate-400 text-left"><div className="w-1.5 h-1.5 rounded-full bg-red-500/20 mt-1.5 shrink-0"></div><span>{t('prob_point_1')}</span></div>
+                                            <div className="flex items-start gap-3 text-sm text-slate-400 text-left"><div className="w-1.5 h-1.5 rounded-full bg-red-500/20 mt-1.5 shrink-0"></div><span>{t('prob_point_2')}</span></div>
+                                            <div className="flex items-start gap-3 text-sm text-slate-400 text-left"><div className="w-1.5 h-1.5 rounded-full bg-red-500/20 mt-1.5 shrink-0"></div><span>{t('prob_point_3')}</span></div>
                                         </div>
                                     </div>
                                 </div>
@@ -88,9 +88,9 @@ const CompanyContext = ({ t }) => {
                                             {t('sol_desc')}
                                         </p>
                                         <div className="mt-4 space-y-3">
-                                            <div className="flex items-start gap-3 text-sm text-slate-300"><div className="w-1.5 h-1.5 rounded-full bg-emerald-500/30 mt-1"></div>{t('sol_point_1')}</div>
-                                            <div className="flex items-start gap-3 text-sm text-slate-300"><div className="w-1.5 h-1.5 rounded-full bg-emerald-500/30 mt-1"></div>{t('sol_point_2')}</div>
-                                            <div className="flex items-start gap-3 text-sm text-slate-300"><div className="w-1.5 h-1.5 rounded-full bg-emerald-500/30 mt-1"></div>{t('sol_point_3')}</div>
+                                            <div className="flex items-start gap-3 text-sm text-slate-300 text-left"><div className="w-1.5 h-1.5 rounded-full bg-emerald-500/30 mt-1.5 shrink-0"></div><span>{t('sol_point_1')}</span></div>
+                                            <div className="flex items-start gap-3 text-sm text-slate-300 text-left"><div className="w-1.5 h-1.5 rounded-full bg-emerald-500/30 mt-1.5 shrink-0"></div><span>{t('sol_point_2')}</span></div>
+                                            <div className="flex items-start gap-3 text-sm text-slate-300 text-left"><div className="w-1.5 h-1.5 rounded-full bg-emerald-500/30 mt-1.5 shrink-0"></div><span>{t('sol_point_3')}</span></div>
                                         </div>
                                     </div>
                                 </div>

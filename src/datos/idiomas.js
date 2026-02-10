@@ -42,13 +42,14 @@ export const translations = {
 
         // Navigation & Views
         'nav_engineering': 'Ingeniería',
+        'nav_standards': 'Estándares',
 
         // Hero Section
         'hero_badge': 'Plataforma para subcontratistas, técnicos e ingenieros',
-        'hero_title_1': 'Gana más proyectos cotizando',
-        'hero_title_2': 'con precisión y velocidad',
+        'hero_title_1': 'Crea y gestiona presupuestos',
+        'hero_title_2': 'exactos y rápidos',
         'hero_title_3': 'usando IA',
-        'hero_desc': 'Deja de perder horas en Excel. Genera metrados y presupuestos técnicos automáticos para HVAC, Eléctrica, iluminaria, entre otras areas. Cierra tratos 3x más rápido.',
+        'hero_desc': 'Convierte tus datos en metrados y presupuestos técnicos automáticos para HVAC, eléctrica, iluminación y más. Cotiza hasta 3x más rápido.',
         'hero_cta_demo': 'Agendar demo',
         'hero_cta_access': 'Vista técnica de la plataforma',
         'hero_footer': 'Orbitar permite generar presupuestos técnicos confiables y rápidos a partir de planos y documentación, utilizando automatización e inteligencia artificial.',
@@ -56,10 +57,10 @@ export const translations = {
         // Business Description
         'business_title': '¿Qué es Orbitar?',
         'business_summary': 'Orbitar es una plataforma que actúa como el copiloto. Centralizamos datos dispersos y automatizamos la creación de documentación de alto valor, donde tú gestionas y controlas el proceso.',
-        'business_desc_1': 'Crea presupuestos, cotizaciones y documentación técnica profesional de forma automática y trazable.',
+        'business_desc_1': 'Crea presupuestos, cotizaciones y documentación técnica profesional de forma automática, reduciendo errores y tiempos.',
         'business_desc_2': 'Elimina el error manual y estandariza la calidad de tus documentos, asegurando coherencia técnica y precisión.',
-        'business_desc_3': 'Especializado en subcontratistas de Electricidad, Climatización (HVAC), Sanitarias y Sistemas Especiales. Tu oficina técnica, potenciada.',
-        'business_disclaimer': 'Usa tu información (Excel, PDF, DWG, ETC.) para reducir tiempos y gestionar tus presupuestos o documentación profesional eficientemente.',
+        'business_desc_3': 'Especializado en subcontratistas de Electricidad, Iluminación y múltiples especialidades del sector técnico y de ingeniería.',
+        'business_disclaimer': 'Aprovecha tus archivos (Excel, PDF, DWG y más) para generar y gestionar presupuestos y documentación técnica con mayor rapidez y orden.',
 
         // Problem Solution
         'prob_title': 'El problema que identificamos',
@@ -69,9 +70,9 @@ export const translations = {
         'prob_point_3': 'Inconsistencias entre documentos y alto riesgo de errores técnicos.',
         'sol_title': 'La solución: Orbitar',
         'sol_desc': 'Orbitar centraliza tus datos y elimina el caos de versiones de Excel, reduciendo errores manuales en un 90%.',
-        'sol_point_1': 'Archivos y Datos Locales: Lectura directa de tus carpetas, Excel y documentos técnicos.',
-        'sol_point_2': 'Uso de múltiples fuentes de datos como los de (WhatsApp, Drive, Local) usando APIS.',
-        'sol_point_3': 'Ingeniería con CAD: Aprovechamiento de datos técnicos desde archivos CAD (DWG).',
+        'sol_point_1': 'Procesamiento de Archivos y documentos técnicos en Excel, PDF y otros formatos para estructurar información.',
+        'sol_point_2': 'Integración con múltiples fuentes de datos como WhatsApp, Drive, archivos locales y otras plataformas vía APIs.',
+        'sol_point_3': 'Procesamiento automático de planos DWG para extraer cantidades y datos del proyecto.',
 
         // Architecture Section (Flujo: Chat -> Repo -> Home)
         'arch_title': 'Cómo funciona Orbitar',
@@ -183,7 +184,7 @@ export const translations = {
         'hero_status': 'Orbitar está en fase de despliegue estratégico. Buscamos socios técnicos internacionales para optimizar procesos de ingeniería complejos.',
 
         // Footer
-        'footer_desc': 'Plataforma de Documentación de Ingeniería para Empresas Proveedoras. Estándares Internacionales (ISO).',
+        'footer_desc': 'Plataforma inteligente para generación y gestión de documentación técnica basada en buenas prácticas y estándares del sector.',
         'footer_platform': 'Plataforma',
         'footer_repo': 'Repositorio',
         'footer_security': 'Seguridad',
@@ -204,7 +205,7 @@ export const translations = {
         'eng_ind': 'Ingeniería',
         'eng_elec': 'Ing. Eléctrica',
         'video_placeholder': 'Video Demo',
-        'explore_functionality': 'Ver flujo de ingeniería',
+        'explore_functionality': 'Ver cómo funciona',
         'dev_active_badge': 'Gestión de Calidad ISO',
         'footer_copyright': '© 2026 Orbitar. Todos los derechos reservados.',
         'footer_legal': 'Legal',
@@ -285,13 +286,14 @@ export const translations = {
 
         // Navigation & Views
         'nav_engineering': 'Engineering',
+        'nav_standards': 'Standards',
 
         // Hero Section
         'hero_badge': 'Platform for subcontractors, technicians, and engineers',
-        'hero_title_1': 'Win more projects by quoting',
-        'hero_title_2': 'with precision and speed',
+        'hero_title_1': 'Create and manage budgets',
+        'hero_title_2': 'fast and accurate',
         'hero_title_3': 'using AI',
-        'hero_desc': 'Stop wasting hours in Excel. Generate automatic quantity takeoffs and technical budgets for HVAC, Electrical, lighting, and other areas. Close deals 3x faster.',
+        'hero_desc': 'Convert your data into automatic takeoffs and technical budgets for HVAC, electrical, lighting, and more. Quote up to 3x faster.',
         'hero_cta_demo': 'Request demo',
         'hero_cta_access': 'Technical view of the platform',
         'hero_footer': 'Orbitar allows generating reliable and fast technical budgets from blueprints and documentation, using automation and artificial intelligence.',
@@ -299,10 +301,10 @@ export const translations = {
         // Business Description
         'business_title': 'What is Orbitar?',
         'business_summary': 'Orbitar is a platform that acts as your copilot. We centralize scattered data and automate the creation of high-value documentation, where you manage and control the process.',
-        'business_desc_1': 'Create budgets, quotes, and professional technical documentation automatically and traceably.',
+        'business_desc_1': 'Create budgets, quotes, and professional technical documentation automatically, reducing errors and time.',
         'business_desc_2': 'Eliminate manual errors and standardize the quality of your documents, ensuring technical coherence and precision.',
-        'business_desc_3': 'Specialized for subcontractors in Electricity, HVAC, Plumbing, and Special Systems. Your technical office, empowered.',
-        'business_disclaimer': 'Use your information (Excel, PDF, DWG, etc.) to reduce times and manage your budgets or professional documentation efficiently.',
+        'business_desc_3': 'Specialized in subcontractors for Electricity, Lighting, and multiple technical and engineering specialties.',
+        'business_disclaimer': 'Leverage your files (Excel, PDF, DWG, and more) to generate and manage budgets and technical documentation with greater speed and order.',
 
         // Problem Solution
         'prob_title': 'The problem we identified',
@@ -312,9 +314,9 @@ export const translations = {
         'prob_point_3': 'Inconsistencies between documents and high risk of technical errors.',
         'sol_title': 'The solution: Orbitar',
         'sol_desc': 'Orbitar centralizes your data and eliminates the chaos of Excel versions, reducing manual errors by 90%.',
-        'sol_point_1': 'Local Files and Data: Direct reading of your folders, Excel, and technical documents.',
-        'sol_point_2': 'Use of multiple data sources like (WhatsApp, Drive, Local) using APIs.',
-        'sol_point_3': 'Engineering with CAD: Leveraging technical data from CAD files (DWG).',
+        'sol_point_1': 'Processing of Files and technical documents in Excel, PDF, and other formats to structure information.',
+        'sol_point_2': 'Integration with multiple data sources such as WhatsApp, Drive, local files, and other platforms via APIs.',
+        'sol_point_3': 'Automatic processing of DWG blueprints to extract quantities and project data.',
 
         // Architecture Section (Flow: Chat -> Repo -> Home)
         'arch_title': 'How Orbitar Works',
@@ -341,7 +343,7 @@ export const translations = {
         'modules_desc': 'Specialized in documentation, budgeting, and quoting for subcontractors and engineers. Everything exportable to PDF and reusable to create a living library of knowledge.',
         'mod_budget': 'Budgets',
         'mod_budget_desc': 'Tables based on real Excel. Items, unit prices, and exact measurements.',
-        'mod_memory': 'Quantity Takeoffs',
+        'mod_memory': 'Quantities',
         'mod_memory_desc': 'Exact and detailed metric computations extracted automatically from your blueprints.',
         'mod_philosophy': 'Quotations',
         'mod_philosophy_desc': 'Generation of detailed quotes with cost analysis and unit prices.',
@@ -426,7 +428,7 @@ export const translations = {
         'hero_status': 'Orbitar is in strategic deployment phase. We are looking for international technical partners to optimize complex engineering processes.',
 
         // Footer
-        'footer_desc': 'Engineering Documentation Platform for Provider Companies. International Standards (ISO).',
+        'footer_desc': 'Intelligent platform for generating and managing technical documentation based on industry best practices and standards.',
         'footer_platform': 'Platform',
         'footer_repo': 'Repository',
         'footer_security': 'Security',
@@ -447,7 +449,7 @@ export const translations = {
         'eng_ind': 'Engineering',
         'eng_elec': 'Elec. Eng.',
         'video_placeholder': 'Video Demo',
-        'explore_functionality': 'View engineering flow',
+        'explore_functionality': 'See how it works',
         'dev_active_badge': 'ISO Quality Management',
         'footer_copyright': '© 2026 Orbitar. All rights reserved.',
         'footer_legal': 'Legal',

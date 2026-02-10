@@ -100,7 +100,7 @@ const App = () => {
     const CONTAINER_WIDTH = "max-w-6xl";
 
     return (
-        <div className="min-h-screen bg-[#0D0D14] text-slate-200 font-sans selection:bg-white/20 selection:text-white relative" style={{ zoom: '90%' }}>
+        <div className="app-container min-h-screen bg-[#0D0D14] text-slate-200 font-sans selection:bg-white/20 selection:text-white relative">
             <style dangerouslySetInnerHTML={{
                 __html: `
         /* Scrollbar Global */
@@ -118,6 +118,13 @@ const App = () => {
         }
         ::-webkit-scrollbar-thumb:hover {
           background: #3f3f46; 
+        }
+        
+        /* Zoom solo para escritorio */
+        @media (min-width: 1024px) {
+            .app-container {
+                zoom: 90%;
+            }
         }
       `}} />
             {/* GPU Accelerated Static Background */}
@@ -141,13 +148,13 @@ const App = () => {
                             href="https://docs.google.com/forms/d/e/1FAIpQLSdJA70NBZpnUnfJGwBGw4XybJGPPWzP9q_MiMcRXp-sbBWT2Q/viewform"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="hidden lg:flex items-center justify-center border border-white/10 bg-white/5 hover:bg-white text-white hover:text-black rounded-xl px-6 py-2.5 text-xs font-semibold transition-all duration-700 ease-in-out hover:scale-110 active:scale-95 selection:bg-white selection:text-black"
+                            className="hidden lg:flex items-center justify-center bg-white text-black font-semibold rounded-xl px-6 py-2.5 text-xs transition-all duration-300 ease-in-out scale-110 hover:scale-[1.12] active:scale-95 shadow-lg"
                         >
                             {t('access_btn')}
                         </a>
                     </div>
                 </div>
-            </nav>
+            </nav >
 
 
 
@@ -157,7 +164,7 @@ const App = () => {
                 </Suspense>
                 <MemoizedFooter t={t} />
             </div>
-        </div>
+        </div >
     );
 };
 

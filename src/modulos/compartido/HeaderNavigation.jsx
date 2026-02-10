@@ -14,6 +14,7 @@ const HeaderNavigation = ({ currentView, setView, t }) => {
             <a href="#vision" onClick={(e) => { e.preventDefault(); document.getElementById('vision')?.scrollIntoView({ behavior: 'smooth' }); }} className={commonStyle + " text-slate-500 hover:text-white"}>{t('footer_link_vision')}</a>
             <a href="#arquitectura" onClick={(e) => { e.preventDefault(); document.getElementById('arquitectura')?.scrollIntoView({ behavior: 'smooth' }); }} className={commonStyle + " text-slate-500 hover:text-white"}>{t('footer_link_how')}</a>
             <a href="#documentos" onClick={(e) => { e.preventDefault(); document.getElementById('documentos')?.scrollIntoView({ behavior: 'smooth' }); }} className={commonStyle + " text-slate-500 hover:text-white"}>{t('modules_title')}</a>
+            <a href="#estado" onClick={(e) => { e.preventDefault(); document.getElementById('estado')?.scrollIntoView({ behavior: 'smooth' }); }} className={commonStyle + " text-slate-500 hover:text-white"}>{t('nav_standards')}</a>
         </div>
     );
 };
