@@ -26,14 +26,16 @@ const renderBold = (text) => {
     );
 };
 
-const PREVIEW_IMAGES = [
-    `${import.meta.env.BASE_URL}assets/images/platform_previews/preview_dashboard.png`,
-    `${import.meta.env.BASE_URL}assets/images/platform_previews/preview_chat.png`,
-    `${import.meta.env.BASE_URL}assets/images/platform_previews/preview_projects.png`,
-    `${import.meta.env.BASE_URL}assets/images/platform_previews/preview_document_v2.png`,
-    `${import.meta.env.BASE_URL}assets/images/platform_previews/preview_repository_updated.png`,
-    `${import.meta.env.BASE_URL}assets/images/platform_previews/preview_file_updated.png`
-];
+const getPreviewImages = (lang) => {
+    const isEn = lang === 'en';
+    return [
+        `${import.meta.env.BASE_URL}assets/images/platform_previews/${isEn ? 'preview_dashboard_en.png' : 'preview_dashboard_es.png'}`,
+        `${import.meta.env.BASE_URL}assets/images/platform_previews/${isEn ? 'preview_projects_en.png' : 'preview_projects_es.png'}`,
+        `${import.meta.env.BASE_URL}assets/images/platform_previews/${isEn ? 'preview_repository_en.png' : 'preview_repository_es.png'}`,
+        `${import.meta.env.BASE_URL}assets/images/platform_previews/${isEn ? 'preview_document_en.png' : 'preview_document_es.png'}`,
+        `${import.meta.env.BASE_URL}assets/images/platform_previews/${isEn ? 'preview_file_en.png' : 'preview_file_es.png'}`
+    ];
+};
 
 const useImagePreloader = (currentIndex, images) => {
     useEffect(() => {
@@ -50,16 +52,21 @@ const useImagePreloader = (currentIndex, images) => {
 const IngenieriaView = ({ activeDocFeature, setActiveDocFeature, t }) => {
     const [activePreview, setActivePreview] = useState(0);
 
+    // Detect current language from the 't' function
+    // Assuming 't' returns the key if not found, or we can check a known key
+    const currentLang = t('home') === 'Inicio' ? 'es' : 'en';
+    const PREVIEW_IMAGES = getPreviewImages(currentLang);
+
     // Custom hook for preloading images
     useImagePreloader(activePreview, PREVIEW_IMAGES);
 
     const nextPreview = useCallback(() => {
         setActivePreview(prev => (prev + 1) % PREVIEW_IMAGES.length);
-    }, []);
+    }, [PREVIEW_IMAGES.length]);
 
     const prevPreview = useCallback(() => {
         setActivePreview(prev => (prev - 1 + PREVIEW_IMAGES.length) % PREVIEW_IMAGES.length);
-    }, []);
+    }, [PREVIEW_IMAGES.length]);
 
     const scrollToSection = useCallback((id) => {
         document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
